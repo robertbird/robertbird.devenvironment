@@ -51,12 +51,12 @@ if (Test-PendingReboot) { Invoke-Reboot }
 #cinstm ncrunch2.vs2013
 
 #Browsers
-cinst googlechrome
+cinst googlechrome -y
 #cinstm firefox
 
 #Other essential tools
-cinst 7zip
-cinst adobereader
+cinst 7zip -y
+cinst adobereader -y
 #cinstm javaruntime
 
 #cinst Microsoft-Hyper-V-All -source windowsFeatures
