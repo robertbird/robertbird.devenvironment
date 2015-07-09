@@ -18,7 +18,7 @@ Install-WindowsUpdate -AcceptEula
 if (Test-PendingReboot) { Invoke-Reboot }
 
 # Install Visual Studio 2013 Professional 
-#cinstm VisualStudio2013Professional -InstallArguments WebTools
+#cinstm visualstudio2013premium -InstallArguments WebTools
 #if (Test-PendingReboot) { Invoke-Reboot }
 
 # Visual Studio SDK required for PoshTools extension
@@ -34,30 +34,30 @@ if (Test-PendingReboot) { Invoke-Reboot }
 #Install-ChocolateyVsixPackage T4Toolbox http://visualstudiogallery.msdn.microsoft.com/791817a4-eb9a-4000-9c85-972cc60fd5aa/file/116854/1/T4Toolbox.12.vsix
 #Install-ChocolateyVsixPackage StopOnFirstBuildError http://visualstudiogallery.msdn.microsoft.com/91aaa139-5d3c-43a7-b39f-369196a84fa5/file/44205/3/StopOnFirstBuildError.vsix
 
-# AWS Toolkit is now an MSI available here http://sdk-for-net.amazonwebservices.com/latest/AWSToolsAndSDKForNet.msi (no chocolatey package as of FEB 2014)
-# Install-ChocolateyVsixPackage AwsToolkit http://visualstudiogallery.msdn.microsoft.com/175787af-a563-4306-957b-686b4ee9b497
-
 #Other dev tools
-#cinstm fiddler4
-#cinstm beyondcompare
-#cinstm ProcExp #cinstm sysinternals
-#cinstm NugetPackageExplorer
-#cinstm windbg
-#cinstm Devbox-Clink
-#cinstm TortoiseHg
-#cinstm VisualHG # Chocolatey package is corrupt as of Feb 2014 
-#cinstm linqpad4
-#cinstm TestDriven.Net
-#cinstm ncrunch2.vs2013
+cinstm fiddler4
 
 #Browsers
-cinstm googlechrome
-#cinstm firefox
+cinst googlechrome -y
+cinst firefox -y
 
 #Other essential tools
-cinstm 7zip
-cinstm adobereader
-#cinstm javaruntime
+cinst 7zip -y
+cinst adobereader -y
+cinst javaruntime -y
+cinst skype -y
+cinst sourcetree -y
+cinst dropbox -y
+cinst brackets -y
+cinst notepadplusplus -y
+cinst windirstat -y
+cinst nodejs.install -y
+
+
+#Not on Choco
+# * Cisco VPN
+# * Egnyte desktop sync
+# * Axure
 
 #cinst Microsoft-Hyper-V-All -source windowsFeatures
 cinst IIS-WebServerRole -source windowsfeatures
