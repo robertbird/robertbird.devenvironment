@@ -25,8 +25,8 @@ if (Test-PendingReboot) { Invoke-Reboot }
 #cinstm VS2013SDK
 #if (Test-PendingReboot) { Invoke-Reboot }
 
-cinstm DotNet3.5 # Not automatically installed with VS 2013. Includes .NET 2.0. Uses Windows Features to install.
-if (Test-PendingReboot) { Invoke-Reboot }
+#cinst DotNet3.5 # Not automatically installed with VS 2013. Includes .NET 2.0. Uses Windows Features to install.
+#if (Test-PendingReboot) { Invoke-Reboot }
 
 # VS extensions
 #Install-ChocolateyVsixPackage PowerShellTools http://visualstudiogallery.msdn.microsoft.com/c9eb3ba8-0c59-4944-9a62-6eee37294597/file/112013/6/PowerShellTools.vsix
@@ -35,7 +35,7 @@ if (Test-PendingReboot) { Invoke-Reboot }
 #Install-ChocolateyVsixPackage StopOnFirstBuildError http://visualstudiogallery.msdn.microsoft.com/91aaa139-5d3c-43a7-b39f-369196a84fa5/file/44205/3/StopOnFirstBuildError.vsix
 
 #Other dev tools
-cinstm fiddler4
+cinst fiddler4
 
 #Browsers
 cinst googlechrome -y
