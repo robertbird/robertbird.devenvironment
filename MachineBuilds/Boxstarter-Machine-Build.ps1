@@ -14,8 +14,8 @@ Set-TaskbarSmall
 if (Test-PendingReboot) { Invoke-Reboot }
 
 # Update Windows and reboot if necessary
-Install-WindowsUpdate -AcceptEula
-if (Test-PendingReboot) { Invoke-Reboot }
+#Install-WindowsUpdate -AcceptEula
+#if (Test-PendingReboot) { Invoke-Reboot }
 
 # Install Visual Studio 2013 Professional 
 #cinstm visualstudio2013premium -InstallArguments WebTools
@@ -68,3 +68,8 @@ cinst IIS-WindowsAuthentication -source windowsfeatures
 Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles86)\Google\Chrome\Application\chrome.exe"
 #Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
 
+
+
+# Update Windows and reboot if necessary
+Install-WindowsUpdate -AcceptEula
+if (Test-PendingReboot) { Invoke-Reboot }
