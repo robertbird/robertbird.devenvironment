@@ -5,7 +5,7 @@ $Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a r
 
 
 # Update Windows and reboot if necessary
-Install-WindowsUpdate -AcceptEula
+Install-WindowsUpdate -AcceptEula -GetUpdatesFromMS
 if (Test-PendingReboot) { Invoke-Reboot }
 
 
