@@ -5,17 +5,13 @@ $Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a r
 
 # Basic setup
 Update-ExecutionPolicy Unrestricted
-Set-ExplorerOptions -showHidenFilesFoldersDrives -showProtectedOSFiles -showFileExtensions
+Set-ExplorerOptions -showHidenFilesFoldersDrives -showFileExtensions
 #Enable-RemoteDesktop
-#Disable-InternetExplorerESC
-Disable-UAC
-Set-TaskbarSmall
+Disable-InternetExplorerESC
+#Disable-UAC
+#Set-TaskbarSmall
 
 if (Test-PendingReboot) { Invoke-Reboot }
-
-# Update Windows and reboot if necessary
-#Install-WindowsUpdate -AcceptEula
-#if (Test-PendingReboot) { Invoke-Reboot }
 
 # Install Visual Studio 2013 Professional 
 #cinstm visualstudio2013premium -InstallArguments WebTools
@@ -34,25 +30,24 @@ if (Test-PendingReboot) { Invoke-Reboot }
 #Install-ChocolateyVsixPackage T4Toolbox http://visualstudiogallery.msdn.microsoft.com/791817a4-eb9a-4000-9c85-972cc60fd5aa/file/116854/1/T4Toolbox.12.vsix
 #Install-ChocolateyVsixPackage StopOnFirstBuildError http://visualstudiogallery.msdn.microsoft.com/91aaa139-5d3c-43a7-b39f-369196a84fa5/file/44205/3/StopOnFirstBuildError.vsix
 
-#Other dev tools
-cinst fiddler4
-
 #Browsers
 cinst googlechrome -y
 cinst firefox -y
 
-#Other essential tools
-cinst 7zip -y
-cinst adobereader -y
-cinst javaruntime -y
-cinst skype -y
-cinst sourcetree -y
-cinst dropbox -y
+#Other dev tools
+cinst fiddler4 -y
 cinst brackets -y
 cinst notepadplusplus -y
-cinst windirstat -y
 cinst nodejs.install -y
+cinst sourcetree -y
 
+#Other essential tools
+cinst winrar -y
+cinst adobereader -y
+cinst skype -y
+cinst dropbox -y
+cinst windirstat -y
+#cinst javaruntime -y
 
 #Not on Choco
 # * Cisco VPN
@@ -67,7 +62,6 @@ cinst IIS-WindowsAuthentication -source windowsfeatures
 
 Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles86)\Google\Chrome\Application\chrome.exe"
 #Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
-
 
 
 # Update Windows and reboot if necessary
