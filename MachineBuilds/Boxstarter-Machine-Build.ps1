@@ -53,6 +53,8 @@ cinst adobereader -y
 cinst skype -y
 cinst dropbox -y
 cinst windirstat -y
+cinst virtualbox -y
+#cinst genymotion -y # use Xamarin player instead?
 #cinst javaruntime -y
 
 #Not on Choco
