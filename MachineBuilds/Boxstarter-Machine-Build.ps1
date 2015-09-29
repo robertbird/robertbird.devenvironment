@@ -3,6 +3,12 @@ $Boxstarter.RebootOk=$true # Allow reboots?
 $Boxstarter.NoPassword=$false # Is this a machine with no login password?
 $Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a reboot
 
+
+# Update Windows and reboot if necessary
+Install-WindowsUpdate -AcceptEula
+if (Test-PendingReboot) { Invoke-Reboot }
+
+
 # Basic setup
 Update-ExecutionPolicy Unrestricted
 Set-ExplorerOptions -showHidenFilesFoldersDrives -showFileExtensions
@@ -63,7 +69,3 @@ cinst IIS-WindowsAuthentication -source windowsfeatures
 Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles86)\Google\Chrome\Application\chrome.exe"
 #Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
 
-
-# Update Windows and reboot if necessary
-Install-WindowsUpdate -AcceptEula
-if (Test-PendingReboot) { Invoke-Reboot }
