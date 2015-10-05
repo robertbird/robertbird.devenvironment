@@ -3,20 +3,15 @@ $Boxstarter.RebootOk=$true # Allow reboots?
 $Boxstarter.NoPassword=$false # Is this a machine with no login password?
 $Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a reboot
 
-
-# Update Windows and reboot if necessary
-Install-WindowsUpdate -AcceptEula -GetUpdatesFromMS
-if (Test-PendingReboot) { Invoke-Reboot }
-
-
 # Basic setup
 Update-ExecutionPolicy Unrestricted
-Set-ExplorerOptions -showHidenFilesFoldersDrives -showFileExtensions
+Set-ExplorerOptions -showFileExtensions
 #Enable-RemoteDesktop
 Disable-InternetExplorerESC
 #Disable-UAC
 #Set-TaskbarSmall
 
+cinst DotNet3.5 # Not automatically installed. Includes .NET 2.0. Uses Windows Features to install.
 if (Test-PendingReboot) { Invoke-Reboot }
 
 # Install Visual Studio 2013 Professional 
@@ -25,9 +20,6 @@ if (Test-PendingReboot) { Invoke-Reboot }
 
 # Visual Studio SDK required for PoshTools extension
 #cinstm VS2013SDK
-#if (Test-PendingReboot) { Invoke-Reboot }
-
-#cinst DotNet3.5 # Not automatically installed with VS 2013. Includes .NET 2.0. Uses Windows Features to install.
 #if (Test-PendingReboot) { Invoke-Reboot }
 
 # VS extensions
@@ -56,6 +48,7 @@ cinst windirstat -y
 cinst virtualbox -y
 #cinst genymotion -y # use Xamarin player instead?
 #cinst javaruntime -y
+choco install join.me -y
 
 #Not on Choco
 # * Cisco VPN
@@ -70,4 +63,8 @@ cinst IIS-WindowsAuthentication -source windowsfeatures
 
 Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles86)\Google\Chrome\Application\chrome.exe"
 #Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe"
+
+# Update Windows and reboot if necessary
+Install-WindowsUpdate -AcceptEula -GetUpdatesFromMS
+if (Test-PendingReboot) { Invoke-Reboot }
 
