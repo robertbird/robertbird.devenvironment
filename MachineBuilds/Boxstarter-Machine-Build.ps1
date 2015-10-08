@@ -3,6 +3,13 @@ $Boxstarter.RebootOk=$true # Allow reboots?
 $Boxstarter.NoPassword=$false # Is this a machine with no login password?
 $Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a reboot
 
+#### .NET 3.5 ####
+
+cinst dotnet3.5 -y # Not automatically installed. Includes .NET 2.0. Uses Windows Features to install.
+if (Test-PendingReboot) { Invoke-Reboot }
+
+#### WINDOWS SETTTINGS #####
+
 # Basic setup
 Update-ExecutionPolicy Unrestricted
 Set-ExplorerOptions -showFileExtensions
@@ -11,22 +18,36 @@ Disable-InternetExplorerESC
 #Disable-UAC
 #Set-TaskbarSmall
 
-cinst DotNet3.5 # Not automatically installed. Includes .NET 2.0. Uses Windows Features to install.
-if (Test-PendingReboot) { Invoke-Reboot }
+# disable defrag because I have an SSD
+Get-ScheduledTask -TaskName *defrag* | Disable-ScheduledTask
 
-# Install Visual Studio 2013 Professional 
-#cinstm visualstudio2013premium -InstallArguments WebTools
-#if (Test-PendingReboot) { Invoke-Reboot }
+################################# POWER SETTINGS #################################
 
-# Visual Studio SDK required for PoshTools extension
-#cinstm VS2013SDK
-#if (Test-PendingReboot) { Invoke-Reboot }
+# Turn off hibernation
+# powercfg /H OFF
 
-# VS extensions
-#Install-ChocolateyVsixPackage PowerShellTools http://visualstudiogallery.msdn.microsoft.com/c9eb3ba8-0c59-4944-9a62-6eee37294597/file/112013/6/PowerShellTools.vsix
-#Install-ChocolateyVsixPackage WebEssentials2013 http://visualstudiogallery.msdn.microsoft.com/56633663-6799-41d7-9df7-0f2a504ca361/file/105627/31/WebEssentials2013.vsix
-#Install-ChocolateyVsixPackage T4Toolbox http://visualstudiogallery.msdn.microsoft.com/791817a4-eb9a-4000-9c85-972cc60fd5aa/file/116854/1/T4Toolbox.12.vsix
-#Install-ChocolateyVsixPackage StopOnFirstBuildError http://visualstudiogallery.msdn.microsoft.com/91aaa139-5d3c-43a7-b39f-369196a84fa5/file/44205/3/StopOnFirstBuildError.vsix
+# Change Power saving options (ac=plugged in dc=battery)
+powercfg -change -monitor-timeout-ac 0
+powercfg -change -monitor-timeout-dc 15
+powercfg -change -standby-timeout-ac 0
+powercfg -change -standby-timeout-dc 30
+powercfg -change -disk-timeout-ac 0
+powercfg -change -disk-timeout-dc 30
+powercfg -change -hibernate-timeout-ac 0
+
+## When docked - Make sure that when I close the lid of my laptop it doesn't go to sleep
+
+# retrieve the current power mode Guid
+$guid = (Get-WmiObject -Class win32_powerplan -Namespace root\cimv2\power -Filter "isActive='true'").InstanceID.tostring() 
+$regex = [regex]"{(.*?)}$" 
+$guidVal = $regex.Match($guid).groups[1].value #$regex.Match($guid) 
+# Write-Host $guidVal
+# Set close the lid power option to 'Do Nothing' for plugged in.
+powercfg -SETACVALUEINDEX $guidVal 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 0
+#To see what other options are available - run the following:
+# powercfg -Q $guidVal
+
+################################# SOFTWARE #######################################
 
 #Browsers
 cinst googlechrome -y
@@ -47,7 +68,7 @@ cinst dropbox -y
 cinst windirstat -y
 cinst virtualbox -y
 #cinst genymotion -y # use Xamarin player instead?
-#cinst javaruntime -y
+choco install jdk8 -y
 choco install join.me -y
 
 #Not on Choco
