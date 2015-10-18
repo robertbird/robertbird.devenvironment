@@ -59,6 +59,10 @@ cinst brackets -y
 cinst notepadplusplus -y
 cinst nodejs.install -y
 cinst sourcetree -y
+choco install ruby -y
+choco install ruby2.devkit -y
+choco install python2 -y
+choco install tortoisesvn -y
 
 #Other essential tools
 cinst winrar -y
@@ -69,7 +73,9 @@ cinst windirstat -y
 cinst virtualbox -y
 #cinst genymotion -y # use Xamarin player instead?
 choco install jdk8 -y
+#choco install maven -y # This package installs into C:/bin which is too annoying 
 choco install join.me -y
+choco intall clover -y # windows explorer tabs
 
 #Not on Choco
 # * Cisco VPN
@@ -88,4 +94,24 @@ Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles86)\Google\Chrome
 # Update Windows and reboot if necessary
 Install-WindowsUpdate -AcceptEula -GetUpdatesFromMS
 if (Test-PendingReboot) { Invoke-Reboot }
+
+# http://jekyll-windows.juthilo.com/3-syntax-highlighting/
+# http://romuluscrisan.com/jekyll/2014/03/06/install-jekyll-using-chocolatey.html
+#Install python pip 
+$storageDir = "C:\tools\python2\pip"
+md -Force $storageDir
+$webclient = New-Object System.Net.WebClient
+$url = "https://bootstrap.pypa.io/get-pip.py"
+$file = "$storageDir\get-pip.py"
+$webclient.DownloadFile($url,$file)
+
+# Add to path
+$oldpath = (Get-ItemProperty -Path ‘Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment’ -Name PATH).path
+$newpath = “$oldpath;C:\tools\python2\scripts”
+Set-ItemProperty -Path ‘Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment’ -Name PATH –Value $newPath
+
+
+
+
+
 
