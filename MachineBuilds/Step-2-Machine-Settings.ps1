@@ -51,8 +51,8 @@ Get-ScheduledTask -TaskName *defrag* | Disable-ScheduledTask
 ################################# WINDOWS COMPONENTS #################################
 
 #### .NET 3.5 ####
-choco install dotnet3.5 -y # Not automatically installed. Includes .NET 2.0. Uses Windows Features to install.
-if (Test-PendingReboot) { Invoke-Reboot }
+# choco install dotnet3.5 -y # Not automatically installed. Includes .NET 2.0. Uses Windows Features to install.
+# if (Test-PendingReboot) { Invoke-Reboot }
 
 #cinst Microsoft-Hyper-V-All -source windowsFeatures
 choco install IIS-WebServerRole -source windowsfeatures
@@ -61,7 +61,7 @@ choco install IIS-ManagementScriptingTools -source windowsfeatures
 choco install IIS-WindowsAuthentication -source windowsfeatures
 
 # Update Windows and reboot if necessary
-Install-WindowsUpdate -AcceptEula -GetUpdatesFromMS
+# Install-WindowsUpdate -AcceptEula -GetUpdatesFromMS
 if (Test-PendingReboot) { Invoke-Reboot }
 
 
