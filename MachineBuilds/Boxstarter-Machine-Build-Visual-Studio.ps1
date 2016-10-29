@@ -27,6 +27,8 @@ choco install VisualStudio2015Enterprise -y -InstallArguments WebTools -version 
 ### VS extensions
 
 # TFS power tools
+#resharper
+choco install resharper -version 9.2.0.0 -y 
 Install-ChocolateyVsixPackage VS2015TFSPowerTools https://visualstudiogallery.msdn.microsoft.com/898a828a-af00-42c6-bbb2-530dc7b8f2e1/file/177107/1/tfpt.msi
 
 # Specbind

@@ -1,0 +1,3 @@
+BOXSTARTERSHELL
+
+START http://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/robertbird/robertbird.devenvironment/master/MachineBuilds/Step-2-Machine-Settings.ps1
